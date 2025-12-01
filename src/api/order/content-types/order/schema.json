@@ -1,0 +1,109 @@
+{
+  "kind": "collectionType",
+  "collectionName": "orders",
+  "info": {
+    "singularName": "order",
+    "pluralName": "orders",
+    "displayName": "Order",
+    "description": "Customer orders with payment tracking"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "order_id": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "customer_first_name": {
+      "type": "string",
+      "required": true
+    },
+    "customer_last_name": {
+      "type": "string",
+      "required": true
+    },
+    "customer_email": {
+      "type": "email",
+      "required": true
+    },
+    "customer_phone": {
+      "type": "string",
+      "required": true
+    },
+    "customer_document": {
+      "type": "string"
+    },
+    "customer_document_type": {
+      "type": "enumeration",
+      "enum": ["dni", "ce", "ruc", "passport"],
+      "default": "dni"
+    },
+    "shipping_department": {
+      "type": "string"
+    },
+    "shipping_province": {
+      "type": "string"
+    },
+    "shipping_district": {
+      "type": "string"
+    },
+    "shipping_address": {
+      "type": "text"
+    },
+    "shipping_reference": {
+      "type": "text"
+    },
+    "needs_shipping": {
+      "type": "boolean",
+      "default": true
+    },
+    "items": {
+      "type": "json",
+      "required": true
+    },
+    "subtotal": {
+      "type": "decimal",
+      "required": true
+    },
+    "shipping_cost": {
+      "type": "decimal",
+      "default": 0
+    },
+    "total": {
+      "type": "decimal",
+      "required": true
+    },
+    "payment_method": {
+      "type": "enumeration",
+      "enum": ["yape", "plin", "transfer", "cash"],
+      "default": "yape"
+    },
+    "payment_proof_uploaded": {
+      "type": "boolean",
+      "default": false
+    },
+    "payment_proof_filename": {
+      "type": "string"
+    },
+    "payment_proof": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images"]
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": ["pending", "confirmed", "processing", "shipped", "delivered", "cancelled"],
+      "default": "pending"
+    },
+    "notes": {
+      "type": "text"
+    },
+    "admin_notes": {
+      "type": "text"
+    }
+  }
+}

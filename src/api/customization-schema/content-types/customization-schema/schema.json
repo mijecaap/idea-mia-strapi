@@ -1,0 +1,60 @@
+{
+  "kind": "collectionType",
+  "collectionName": "customization_schemas",
+  "info": {
+    "singularName": "customization-schema",
+    "pluralName": "customization-schemas",
+    "displayName": "Customization Schema",
+    "description": "Schemas for product customization options"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "schema_type": {
+      "type": "enumeration",
+      "enum": ["text", "color", "size", "combo"],
+      "required": true
+    },
+    "config": {
+      "type": "json",
+      "required": true
+    },
+    "validation_rules": {
+      "type": "json"
+    },
+    "preview_template": {
+      "type": "text"
+    },
+    "base_price": {
+      "type": "decimal",
+      "default": 0
+    },
+    "price_per_character": {
+      "type": "decimal",
+      "default": 0
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true
+    },
+    "sort_order": {
+      "type": "integer",
+      "default": 0
+    },
+    "products": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::product.product",
+      "mappedBy": "customization_schemas"
+    }
+  }
+}

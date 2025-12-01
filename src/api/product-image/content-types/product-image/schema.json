@@ -1,0 +1,56 @@
+{
+  "kind": "collectionType",
+  "collectionName": "product_images",
+  "info": {
+    "singularName": "product-image",
+    "pluralName": "product-images",
+    "displayName": "Product Image",
+    "description": "Images for products with sorting and type classification"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "alt_text": {
+      "type": "string",
+      "maxLength": 255
+    },
+    "is_primary": {
+      "type": "boolean",
+      "default": false
+    },
+    "sort_order": {
+      "type": "integer",
+      "default": 0
+    },
+    "image_type": {
+      "type": "enumeration",
+      "enum": ["main", "gallery", "lifestyle", "variant"],
+      "default": "gallery"
+    },
+    "show_in_gallery": {
+      "type": "boolean",
+      "default": true
+    },
+    "show_in_listing": {
+      "type": "boolean",
+      "default": true
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": ["images"]
+    },
+    "product": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::product.product",
+      "inversedBy": "images"
+    }
+  }
+}
