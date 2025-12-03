@@ -615,21 +615,37 @@ export interface ApiCustomizationSchemaCustomizationSchema
   extends Struct.CollectionTypeSchema {
   collectionName: 'customization_schemas';
   info: {
-    description: 'Schemas for product customization options';
-    displayName: 'Customization Schema';
+    description: 'Esquemas de personalizaci\u00F3n din\u00E1micos para productos';
+    displayName: 'Esquema de Personalizaci\u00F3n';
     pluralName: 'customization-schemas';
     singularName: 'customization-schema';
   };
   options: {
-    draftAndPublish: false;
+    draftAndPublish: true;
   };
   attributes: {
-    base_price: Schema.Attribute.Decimal & Schema.Attribute.DefaultTo<0>;
     config: Schema.Attribute.JSON & Schema.Attribute.Required;
+    control_type: Schema.Attribute.Enumeration<
+      [
+        'input_text',
+        'textarea',
+        'select',
+        'radio_group',
+        'checkbox',
+        'color_picker',
+        'number',
+        'image_upload',
+      ]
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'input_text'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    description: Schema.Attribute.Text;
+    description: Schema.Attribute.Text &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 500;
+      }>;
     is_active: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -637,21 +653,21 @@ export interface ApiCustomizationSchemaCustomizationSchema
       'api::customization-schema.customization-schema'
     > &
       Schema.Attribute.Private;
-    name: Schema.Attribute.String & Schema.Attribute.Required;
-    preview_template: Schema.Attribute.Text;
-    price_per_character: Schema.Attribute.Decimal &
-      Schema.Attribute.DefaultTo<0>;
+    name: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 100;
+      }>;
+    preview_template: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 255;
+      }>;
     products: Schema.Attribute.Relation<'manyToMany', 'api::product.product'>;
     publishedAt: Schema.Attribute.DateTime;
-    schema_type: Schema.Attribute.Enumeration<
-      ['text', 'color', 'size', 'combo']
-    > &
-      Schema.Attribute.Required;
     sort_order: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    validation_rules: Schema.Attribute.JSON;
   };
 }
 

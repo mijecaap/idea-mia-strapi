@@ -4,43 +4,45 @@
   "info": {
     "singularName": "customization-schema",
     "pluralName": "customization-schemas",
-    "displayName": "Customization Schema",
-    "description": "Schemas for product customization options"
+    "displayName": "Esquema de Personalización",
+    "description": "Esquemas de personalización dinámicos para productos"
   },
   "options": {
-    "draftAndPublish": false
+    "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
     "name": {
       "type": "string",
-      "required": true
+      "required": true,
+      "maxLength": 100
     },
     "description": {
-      "type": "text"
+      "type": "text",
+      "maxLength": 500
     },
-    "schema_type": {
+    "control_type": {
       "type": "enumeration",
-      "enum": ["text", "color", "size", "combo"],
-      "required": true
+      "enum": [
+        "input_text",
+        "textarea",
+        "select",
+        "radio_group",
+        "checkbox",
+        "color_picker",
+        "number",
+        "image_upload"
+      ],
+      "required": true,
+      "default": "input_text"
     },
     "config": {
       "type": "json",
       "required": true
     },
-    "validation_rules": {
-      "type": "json"
-    },
     "preview_template": {
-      "type": "text"
-    },
-    "base_price": {
-      "type": "decimal",
-      "default": 0
-    },
-    "price_per_character": {
-      "type": "decimal",
-      "default": 0
+      "type": "string",
+      "maxLength": 255
     },
     "is_active": {
       "type": "boolean",
